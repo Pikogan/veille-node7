@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<%- include('partials/head.ejs') %>
+<body>
+
+	<%- include('partials/header.ejs') %>
+	<%- include('partials/menu.ejs') %>
+ <table class="tableau">
+
+ <%let noLigne = 0%>
+ <%let ordre%>
+ <%let noI = 0%>
+ <%let noms = ["id","prenom","nom","telephone","email"]%>
+ <%if (typeof ordre_html === 'undefined' || !ordre_html){
+
+ 		ordre_html = "asc";
+
+   }%>
+
+  <%if (typeof cle_html === 'undefined' || !cle_html){
+
+	cle_html = "prenom";
+
+ }%>
+
+ <%for(element of ex_6){%>
+
+ <%if(noLigne==0){%>
+
+	 <tr>
+	<%noLigne++%>
+	<%for(p in element){%>
+
+			
+
+	 			<th><a href=http://127.0.0.1:8081/trier/<%if (cle_html == p){if(ordre_html=="desc"){ordre_html = "asc"}else{ordre_html = "desc"}}%><%=p%>/<%=ordre_html%>><%=p%></a></th>
+				
+			
+			<%noI++%>
+	<%}%>
+		<td colspan="2"><a href=http://127.0.0.1:8081/ajouter>Ajouter</a></td>
+	</tr>
+ <%}%>
+
+
+ <tr>
+ 	<%let i = 0%>
+ 	<% for (p in element){%>
+ 	
+
+ <td contenteditable='true' name=<%=noms[i]%>><%=element[p]%></td>
+
+
+
+ <%i++%>
+<%}%>
+
+<td>
+	<a href=http://127.0.0.1:8081/suprimer/<%=element._id%> >Suprimer</a>
+</td>
+
+<td>
+	<a href=# class=sauver>Modifier</a>
+</td>
+ </tr>
+ 
+ <%}%>
+ </table>
+
+ <form id="mon_formulaire" action = "/modifier" method = "post">
+ 	<input type="hidden" name="_id">
+ 	<input type="hidden" name="prenom">
+ 	<input type="hidden" name="nom">
+ 	<input type="hidden" name="telephone">
+ 	<input type="hidden" name="email">
+ </form>
+
+ <script type="text/javascript">
+ let elmSauver = document.querySelectorAll('.sauver')
+ console.log('elmSauver = ' + elmSauver.length)
+ for (elm of elmSauver)
+ {
+ elm.addEventListener('click', function(){
+ /* 
+ console.log(this
+ .parentNode
+ .parentNode
+ .children[1].innerHTML)
+ */
+ let laLigne = this.parentNode.parentNode
+ let id = laLigne.children[0].innerHTML
+ let prenom = laLigne.children[1].innerHTML
+  let nom = laLigne.children[2].innerHTML
+ let telephone = laLigne.children[3].innerHTML
+ let email = laLigne.children[4].innerHTML
+
+let elmForm = document.getElementById('mon_formulaire')
+ console.log(elmForm.tagName)
+ let elmInput = elmForm.querySelectorAll('input')
+ elmInput[0].value = id
+ elmInput[1].value = prenom
+ elmInput[2].value = nom
+ elmInput[3].value = telephone
+ elmInput[4].value = email
+
+elmForm.submit()
+
+ })
+ } 
+</script>
+
+<%- include('partials/footer.ejs') %>
+</body>
+</html>
