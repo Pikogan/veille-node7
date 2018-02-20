@@ -98,6 +98,21 @@ console.log(req.params.ordre)
 })
 })
 
+////////////////////////////////////////////////////////////////////////////////////////////
+
+app.get('/peuplement', (req, res) => {
+    let peupler = require('./component/peuplement.js');
+    let nouvelleListe = peupler();
+    db.collection('adresse').insert(nouvelleListe, (err, enreg) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            peupler = "";
+            res.redirect('/');
+        }
+    });
+})
+
 let db // variable qui contiendra le lien sur la BD
 
 MongoClient.connect('mongodb://127.0.0.1:27017', (err, database) => {
