@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
- <meta charset="UTF-8">
- <title>Membres</title>
- <link rel="stylesheet" type="text/css" href="/css/style.css">
-<link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Questrial" rel="stylesheet">
-</head>
+<%- include('partials/head.ejs') %>
 <body>
 	<h1>Carnet d'adresse</h1>
 	<h2>Membres</h2>
@@ -18,7 +13,6 @@
  				}
 
  			%>
-
 
  			<% let noLigne = 0 %>
  			<% for(element of adresses) {%>
@@ -41,8 +35,6 @@
 	 			<% } %>
 
  			<% } %>
-
-
 
 
 
@@ -87,16 +79,10 @@
  	<script type="text/javascript">
  	  	(function(){
 			 let elmSauver = document.querySelectorAll('.sauver')
-			 console.log('elmSauver = ' + elmSauver.length)
 			 for (elm of elmSauver)
 			 {
 				 elm.addEventListener('click', function(){
-					 /* 
-					 console.log(this
-					 .parentNode
-					 .parentNode
-					 .children[1].innerHTML)
-					 */
+
 					 let laLigne = this.parentNode.parentNode
 					 let id = laLigne.children[0].innerHTML
 					 let nom = laLigne.children[2].innerHTML
